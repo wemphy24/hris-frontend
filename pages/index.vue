@@ -5,11 +5,19 @@
       <div class="form-group">
         <label class="text-grey">Companies</label>
         <select
-          name=""
+          v-if="companies.data"
+          v-model="selectedCompany"
+          name="companies"
           id=""
           class="appearance-none input-field form-icon-chevron_down"
         >
-          <option value="" selected>Company Name</option>
+          <option
+            value=""
+            v-for="company in companies.data.result.data"
+            :key="company.id"
+          >
+            {{ company.name }}
+          </option>
         </select>
         <NuxtLink to="/" class="w-full btn btn-primary mt-[14px]">
           Continue
@@ -19,4 +27,17 @@
   </section>
 </template>
 
-<script></script>
+<script>
+export default {
+  middleware: 'auth',
+  data() {
+    return {
+      companies: [],
+      selectedCompany: '',
+    }
+  },
+  async fetch() {
+    this.companies = await this.$axios.get('/company')
+  },
+}
+</script>

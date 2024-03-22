@@ -49,6 +49,29 @@ export default {
     baseURL: '/',
   },
 
+  // Nuxt auth
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'result.access_token',
+          global: true,
+          required: true,
+          type: 'Bearer',
+        },
+        user: {
+          property: 'result',
+          autoFetch: true,
+        },
+        endpoints: {
+          login: { url: '/login', method: 'post' },
+          logout: { url: '/logout', method: 'post' },
+          user: { url: '/user', method: 'get' },
+        },
+      },
+    },
+  },
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     postcss: {

@@ -102,9 +102,10 @@
           </div>
         </div>
       </div>
-
+      <p v-if="$fetchState.pending">Fetching employees...</p>
       <div
         class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:gap-10 lg:gap-3"
+        v-else
       >
         <!-- Card -->
         <div class="items-center card py-6 md:!py-10 md:!px-[38px] !gap-y-0">
@@ -246,5 +247,18 @@
 export default {
   layout: 'dashboard',
   middleware: 'auth',
+
+  data() {
+    return {
+      employees: [],
+    }
+  },
+
+  async fetch() {
+    this.employees = await this.$axios.get('/employee', {
+      params: { company_id: this.$route.params.id, limit: 10 },
+    })
+  },
+  methods: {},
 }
 </script>

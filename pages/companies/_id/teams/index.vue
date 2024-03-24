@@ -76,7 +76,7 @@
           <div class="mt-6 mb-1 font-semibold text-center text-dark">
             {{ team.name }}
           </div>
-          <p class="text-center text-grey">12 People</p>
+          <p class="text-center text-grey">{{ team.employee_count }}</p>
         </div>
       </div>
     </section>
@@ -97,7 +97,7 @@ export default {
   async fetch() {
     // this.teams = await this.$axios.get('/team?company_id=' + this.$route.params.id + '&limit=100')
     this.teams = await this.$axios.get('/team', {
-      params: { company_id: 4, limit: 100 },
+      params: { company_id: this.$route.params.id, limit: 100 },
     })
   },
   methods: {},

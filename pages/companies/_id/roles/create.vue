@@ -5,12 +5,12 @@
       Manage your employees to achieve <br />
       a bigger goals for your company
     </p>
-    <form class="w-full card">
+    <form class="w-full card" @submit.prevent="createRole">
       <div class="form-group">
         <label for="" class="text-grey">Role Name</label>
-        <input type="text" class="input-field" value="Product Marketing" />
+        <input type="text" class="input-field" v-model="role.name" />
       </div>
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="idRes" class="text-grey">Responsibility</label>
         <ul id="listResp" class="flex flex-col gap-4">
           <li class="inline-flex items-center w-full gap-5">
@@ -25,10 +25,10 @@
             </a>
           </li>
         </ul>
-      </div>
-      <a href="roles.html" class="w-full btn btn-primary mt-[14px]">
+      </div> -->
+      <button type="submit" class="w-full btn btn-primary mt-[14px]">
         Save Role
-      </a>
+      </button>
     </form>
   </section>
 </template>
@@ -37,6 +37,30 @@
 export default {
   layout: 'form',
   middleware: 'auth',
+
+  data() {
+    return {
+      role: {
+        name: '',
+        company_id: this.$route.params.id,
+      },
+    }
+  },
+  methods: {
+    async createRole() {
+      try {
+        // send team data to server API
+        const response = await this.$axios.post('/role', this.role)
+
+        // redirect to role page
+        this.$router.push({ name: 'companies-id-roles' })
+
+        console.log(response)
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  },
 }
 </script>
 

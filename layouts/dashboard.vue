@@ -64,10 +64,10 @@
             <img src="/assets/svgs/ic-settings.svg" alt="" />
             Settings
           </NuxtLink>
-          <NuxtLink to="#" class="nav-link">
+          <button type="submit" @click="$auth.logout()" class="nav-link">
             <img src="/assets/svgs/ic-signout.svg" alt="" />
             Logout
-          </NuxtLink>
+          </button>
         </div>
       </div>
     </div>

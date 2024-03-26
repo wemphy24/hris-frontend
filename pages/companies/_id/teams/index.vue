@@ -52,8 +52,10 @@
             <div class="text-xl font-medium text-dark">Available</div>
             <p class="text-grey">Empower company</p>
           </div>
-          <a href="my-teams_create.html" class="btn btn-primary"
-            >Build New Team</a
+          <NuxtLink
+            :to="{ name: 'companies-id-teams-create' }"
+            class="btn btn-primary"
+            >Build New Team</NuxtLink
           >
         </div>
       </div>
@@ -72,11 +74,11 @@
             href="#"
             class="absolute inset-0 focus:ring-2 ring-primary rounded-[26px]"
           ></a>
-          <img src="/assets/svgs/ric-box.svg" alt="" />
+          <img :src="team.icon" alt="" />
           <div class="mt-6 mb-1 font-semibold text-center text-dark">
             {{ team.name }}
           </div>
-          <p class="text-center text-grey">{{ team.employee_count }}</p>
+          <p class="text-center text-grey">12 people</p>
         </div>
       </div>
     </section>
